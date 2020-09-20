@@ -522,16 +522,15 @@ if __name__ == '__main__':
         repo = g.get_repo(f"{username}/{username}")
         contents = repo.get_readme()
         waka_stats = get_stats(g)
-        
-        if debug:
-            print(waka_stats)
-        else:
-            rdmd = decode_readme(contents.content)
-            new_readme = generate_new_readme(stats=waka_stats, readme=rdmd)
-            if new_readme != rdmd:
-                repo.update_file(path=contents.path, message='Updated with Dev Metrics',
-                                content=new_readme, sha=contents.sha, branch='master')
-                print("Readme updated")
+
+        print(waka_stats)
+
+        rdmd = decode_readme(contents.content)
+        new_readme = generate_new_readme(stats=waka_stats, readme=rdmd)
+        if new_readme != rdmd:
+            repo.update_file(path=contents.path, message='Updated with Dev Metrics',
+                            content=new_readme, sha=contents.sha, branch='master')
+            print("Readme updated")
     except Exception as e:
         traceback.print_exc()
         print("Exception Occurred " + str(e))
