@@ -44,7 +44,7 @@ if not debug:
     showLocChart = os.getenv('INPUT_SHOW_LOC_CHART')
     show_profile_view = os.getenv('INPUT_SHOW_PROFILE_VIEWS')
     show_short_info = os.getenv('INPUT_SHOW_SHORT_INFO')
-    show_waka_stats = 'y'
+    show_waka_stats = os.getenv('SHOW_WAKA_STATS')
 
 else:
     from debug import *
