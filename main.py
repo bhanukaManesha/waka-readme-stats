@@ -44,7 +44,6 @@ if not debug:
     showLocChart = os.getenv('INPUT_SHOW_LOC_CHART')
     show_profile_view = os.getenv('INPUT_SHOW_PROFILE_VIEWS')
     show_short_info = os.getenv('INPUT_SHOW_SHORT_INFO')
-    show_waka_stats = os.getenv('INPUT_SHOW_WAKA_STATS')
 
 else:
     from debug import *
@@ -199,12 +198,12 @@ def make_commit_list(data: list):
     return ' \n'.join(data_list)
 
 
-def generate_commit_list(tz):
+def generate_commit_list():
     string = ''
     result = run_query(userInfoQuery)  # Execute the query
     username = result["data"]["viewer"]["login"]
     id = result["data"]["viewer"]["id"]
-    # print("user {}".format(username))
+    print("user {}".format(username))
 
     repos = run_v3_api(get_repos.substitute())
 
@@ -486,8 +485,11 @@ def get_stats(github):
     if show_short_info.lower() in ['true', '1', 't', 'y', 'yes']:
         stats += get_short_info(github)
 
-    if show_waka_stats.lower() in ['true', '1', 't', 'y', 'yes']:
-        stats += get_waka_time_stats()
+    if showCommit.lower() in ['true', '1', 't', 'y', 'yes']:
+        stats += generate_commit_list() + '\n\n'
+
+    # if show_waka_stats.lower() in ['true', '1', 't', 'y', 'yes']:
+    #     stats += get_waka_time_stats()
 
     if showLocChart.lower() in ['true', '1', 't', 'y', 'yes']:
         loc = LinesOfCode(id, username, ghtoken, repositoryList)
