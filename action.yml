@@ -77,6 +77,11 @@ inputs:
     description: "Shows the short facts"
     default: "True"
 
+  SHOW_WAKA_STATS:
+    required: false
+    description: "Shows the waka stats"
+    default: "False"
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
